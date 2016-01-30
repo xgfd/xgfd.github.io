@@ -1,0 +1,29 @@
+# Dependencies
+markdown:         redcarpet
+highlighter:      pygments
+
+# Permalinks
+permalink:        pretty
+#relative_permalinks: true
+
+# Setup
+title:            Madeleines
+tagline:          ''
+description:      'Tiny pieces of interesting ideas, best served with tea'
+url:              https://xgfd.github.io
+baseurl:          /
+
+author:
+  name:           'Xgfd'
+  url:            https://xgfd.github.io
+
+gems: [jekyll-paginate,jekyll-gist]
+
+paginate: 5
+paginate_path: "page:num"
+
+# Custom vars
+#version:          2.1.0
+#
+#github:
+#  repo:           https://github.com/poole/hyde

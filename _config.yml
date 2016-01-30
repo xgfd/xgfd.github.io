@@ -9,7 +9,7 @@ permalink:        pretty
 # Setup
 title:            Madeleines
 tagline:          ''
-description:      'Tiny pieces of interesting ideas, best served with tea'
+description:      'Tiny pieces of interesting ideas. ... And all from my cup of tea.'
 url:              https://xgfd.github.io
 baseurl:          /
 
@@ -25,5 +25,5 @@ paginate_path: "page:num"
 # Custom vars
 #version:          2.1.0
 #
-#github:
-#  repo:           https://github.com/poole/hyde
+github:
+  repo:           https://github.com/xgfd/xgfd.github.io

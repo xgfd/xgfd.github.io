@@ -198,6 +198,26 @@ a.sidebar-nav-item:focus {
 /* Base16 (http://chriskempson.github.io/base16/#default) */
 
 
+/* Madeleines */
+
+.theme-base-01 .sidebar {
+    background-color: #23282d;
+}
+
+.theme-base-01 .sidebar-about h1 a {
+    color: #FF9800;
+}
+
+.theme-base-01 .content a,
+.theme-base-01 .related-posts li a:hover {
+    color: #FF9800;
+}
+
+.theme-base-01 .content .message a {
+    color: rgba(255, 153, 0, 0.6);
+}
+
+
 /* Red */
 
 .theme-base-08 .sidebar {

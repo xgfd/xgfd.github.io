@@ -5,9 +5,7 @@ title: Y combinator from lambda to Javascript
 
 The Y combinator (see a nice introduction [here](https://medium.com/@ayanonagon/the-y-combinator-no-not-that-one-7268d8d9c46#.cvw529qfv)), discovered by [Haskell B. Curry](https://en.wikipedia.org/wiki/Haskell_Curry), is defined as:
 
-```scheme
-    Y = λf. (λx. f (x x))(λx. f (x x))
-```
+> Y = λf. (λx. f (x x))(λx. f (x x))
 
 <div class="message">
     <a href="http://www.cs.yale.edu/homes/hudak/CS201S08/lambda.pdf">A Brief and Informal Introduction to the Lambda Calculus</a> is a good article to start with if you've never heard of lambda calculus.

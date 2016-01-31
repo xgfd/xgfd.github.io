@@ -12,7 +12,7 @@ tagline:          ''
 description:      'Tiny pieces of delightful ideas'
 url:              https://xgfd.github.io
 baseurl:          /
-rss_path:         feed.xml
+rss_path:         atom.xml
 
 author:
   name:           'Xgfd'

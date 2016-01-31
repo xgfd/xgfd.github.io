@@ -213,10 +213,35 @@ a.sidebar-nav-item:focus {
     color: #FF9800;
 }
 
-.theme-base-01 .content .message a {
-    color: rgba(255, 153, 0, 0.6);
+.theme-base-01 .content a {
+    color: rgba(44, 62, 80, 1.0);
 }
 
+.theme-base-01 .content a:hover {
+    color: rgba(255, 153, 0, 1.0);
+}
+
+.theme-base-01 .content h1 a,
+.theme-base-01 .content h2 a,
+.theme-base-01 .content h3 a,
+.theme-base-01 .content h4 a {
+    color: #f2756a;
+}
+
+.theme-base-01 .content h1 a:hover,
+.theme-base-01 .content h2 a:hover,
+.theme-base-01 .content h3 a:hover,
+.theme-base-01 .content h4 a:hover {
+    color: #e74c3c;
+}
+
+.theme-base-01 .content .message a {
+    color: rgba(44, 62, 80, 0.4);
+}
+
+.theme-base-01 .content .message a:hover {
+    color: rgba(255, 153, 0, 0.6);
+}
 
 /* Red */
 
@@ -362,3 +387,4 @@ ul.list-inline {
     margin-top: 0;
     margin-bottom: 10px;
 }
+

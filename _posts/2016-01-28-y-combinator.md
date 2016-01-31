@@ -13,9 +13,9 @@ The Y combinator (see a nice introduction [here](https://medium.com/@ayanonagon/
     <a href="http://www.cs.yale.edu/homes/hudak/CS201S08/lambda.pdf">A Brief and Informal Introduction to the Lambda Calculus</a> is a good article to start with if you've never heard of lambda calculus.
 </div>
 
-    This form is easy to remember and can be used to derive Y combinator in a functional programming language, like Javascript.
+This form is easy to remember and can be used to derive Y combinator in a functional programming language, like Javascript.
 
-    The lambda expression translates to JS as:
+The lambda expression translates to JS as:
 
 {% gist xgfd/b5d54c0e74b236042f9b YCom_1.js%}
 

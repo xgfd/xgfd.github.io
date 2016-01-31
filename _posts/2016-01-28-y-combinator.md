@@ -1,6 +1,8 @@
 ---
 layout: post
-title: Y combinator from lambda to Javascript
+title: Y combinator from λ to Javascript
+categories: [λ calculus, programming]
+tags: [λ calculus, programming, javascript]
 ---
 
 The Y combinator (see a nice introduction [here](https://medium.com/@ayanonagon/the-y-combinator-no-not-that-one-7268d8d9c46#.cvw529qfv)), discovered by [Haskell B. Curry](https://en.wikipedia.org/wiki/Haskell_Curry), is defined as:
@@ -11,15 +13,19 @@ The Y combinator (see a nice introduction [here](https://medium.com/@ayanonagon/
     <a href="http://www.cs.yale.edu/homes/hudak/CS201S08/lambda.pdf">A Brief and Informal Introduction to the Lambda Calculus</a> is a good article to start with if you've never heard of lambda calculus.
 </div>
 
-This form is easy to remember and can be used to derive Y combinator in a functional programming language, like Javascript.
+    This form is easy to remember and can be used to derive Y combinator in a functional programming language, like Javascript.
 
-The lambda expression translates to JS as:
+    The lambda expression translates to JS as:
 
 {% gist xgfd/b5d54c0e74b236042f9b YCom_1.js%}
 
 However the function body leads to an infinite call loop: 
 
 {% gist xgfd/b5d54c0e74b236042f9b YComLoop.js%}
+
+<div class="message">
+Y(f) is a fixed-point of f, or Y gives a fixed-point of f.
+</div>
 
 Notice that the two inner functions are the same, so it's equivalent to:
 

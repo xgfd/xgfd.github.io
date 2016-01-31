@@ -9,13 +9,21 @@ permalink:        pretty
 # Setup
 title:            Madeleines
 tagline:          ''
-description:      'Tiny pieces of interesting ideas. ... And all from my cup of tea.'
+description:      'Tiny pieces of delightful ideas'
 url:              https://xgfd.github.io
 baseurl:          /
+rss_path:         feed.xml
 
 author:
   name:           'Xgfd'
   url:            https://xgfd.github.io
+  email: xinxinbird@gmail.com 
+  github: xgfd
+  #twitter: dbtek
+  #pinterest: asd123
+  linkedin: xinwang42
+  #bio: Your stylish, minimalist theme!
+  email_md5: ab084080a2c79b0c7055fef19556dade
 
 gems: [jekyll-paginate,jekyll-gist]
 

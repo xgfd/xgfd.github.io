@@ -312,3 +312,53 @@ a.sidebar-nav-item:focus {
 .theme-base-0f .related-posts li a:hover {
     color: #8f5536;
 }
+
+#contact-list {
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+}
+
+#contact-list a {
+    color: rgba(35, 40, 45, 0.6);
+}
+
+#contact-list li .fa {
+    -o-transition: color .2s ease-out, background 1s ease-in;
+    -ms-transition: color .2s ease-out, background 1s ease-in;
+    -moz-transition: color .2s ease-out, background 1s ease-in;
+    -webkit-transition: color .2s ease-out, background 1s ease-in;
+    transition: color .2s ease-out, background 1s ease-in;
+}
+
+#contact-list li:hover .fa-twitter,
+article .share .twitter:hover {
+    color: #00ACEE;
+    border-color: #00ACEE;
+}
+
+#contact-list li:hover .fa-linkedin {
+    color: #1D87BD;
+}
+
+#contact-list li:hover .fa-envelope {
+    color: #E93E30;
+}
+
+#contact-list li:hover .fa-pinterest {
+    color: #CC2127;
+}
+
+#contact-list li:hover .fa-rss {
+    color: #00ab6b;
+}
+
+.list-inline {
+    padding-left: 0;
+    list-style: none;
+}
+
+ul.list-inline {
+    margin-top: 0;
+    margin-bottom: 10px;
+}

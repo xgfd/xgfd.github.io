@@ -7,4 +7,4 @@ tags: [programming, recursion, javascript]
 
 The following code usually apears under the question *multiplying without multiplication operator*, and is a nice demonstration of recursion.
 
-{% gist xgfd/9584ee2b5e0aa13ca485%}
+{% gist xgfd/9584ee2b5e0aa13ca485 mult_wt_x.js%}

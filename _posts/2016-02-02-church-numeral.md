@@ -2,7 +2,7 @@
 layout: post
 title: Rational for Church encoding
 categories: [λ calculus]
-tags: [λ calculas, numeral representation]
+tags: [λ calculus, numeral representation]
 ---
 
 In λ calculus natural numbers are represented in the following form (following normal order reduction):

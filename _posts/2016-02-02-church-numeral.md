@@ -24,11 +24,11 @@ all previous natural numbers. So 1 = {0} = {∅}, 2 = {1, 0} = {{0}, 0}.
 
 Under Church encoding some arithmetic operations are defined as:
 
-> [m + n] → λf. λx. (m f) (n f x) = λf. λx. ((m f) · (n f)) x)
+> [m + n] := λf. λx. (m f) (n f x) = λf. λx. ((m f) · (n f)) x)
 
-> [m × n] → λf. m n = m · n
+> [m × n] := λf. m n = m · n
 
-> m <sup>n</sup> → n m
+> m <sup>n</sup> := n m
 
 Note that multiplication is implemented by function composition and exponentiation by reverse function application.
 

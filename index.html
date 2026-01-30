@@ -1,37 +1,594 @@
----
-layout: default
-title: Home
----
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Generator</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-<div class="posts">
-  {% for post in paginator.posts %}
-  <div class="post">
-    <h1 class="post-title">
-      <a href="{{ post.url }}">
-        {{ post.title }}
-      </a>
-    </h1>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #525659;
+            padding: 20px;
+        }
 
-    <span class="post-date">{{ post.date | date_to_string }}</span>
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 20px;
+        }
 
-    {{ post.content }}
-  </div>
-  {% endfor %}
-</div>
+        .panel {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-height: calc(100vh - 40px);
+            overflow-y: auto;
+        }
 
-<div class="pagination">
-  {% if paginator.next_page %}
-    <a class="pagination-item older" href="{{ site.baseurl }}page{{paginator.next_page}}">Older</a>
-  {% else %}
-    <span class="pagination-item older">Older</span>
-  {% endif %}
-  {% if paginator.previous_page %}
-    {% if paginator.page == 2 %}
-      <a class="pagination-item newer" href="{{ site.baseurl }}">Newer</a>
-    {% else %}
-      <a class="pagination-item newer" href="{{ site.baseurl }}page{{paginator.previous_page}}">Newer</a>
-    {% endif %}
-  {% else %}
-    <span class="pagination-item newer">Newer</span>
-  {% endif %}
-</div>
+        h1 { color: #1d1d1f; margin-bottom: 10px; font-size: 28px; }
+        h3 { color: #1d1d1f; margin-top: 20px; margin-bottom: 10px; font-size: 16px; }
+
+        .form-group { margin-bottom: 15px; }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #1d1d1f;
+            font-weight: 500;
+            font-size: 13px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #d2d2d7;
+            border-radius: 6px;
+            font-size: 13px;
+            font-family: inherit;
+        }
+
+        textarea { min-height: 80px; resize: vertical; }
+
+        button {
+            background: #0071e3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        button:hover { background: #0077ed; }
+        button.secondary { background: #6e6e73; }
+        button.danger { background: #ff3b30; }
+
+        .button-group { display: flex; gap: 8px; margin-top: 20px; flex-wrap: wrap; }
+
+        .tabs {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #d2d2d7;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            padding: 8px 12px;
+            cursor: pointer;
+            border: none;
+            background: none;
+            color: #6e6e73;
+            font-weight: 500;
+            font-size: 13px;
+            border-bottom: 2px solid transparent;
+        }
+
+        .tab.active { color: #0071e3; border-bottom-color: #0071e3; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        .item-list { margin-top: 10px; }
+
+        .item-entry {
+            background: #f5f5f7;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            position: relative;
+            font-size: 12px;
+        }
+
+        .item-entry button {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            padding: 4px 10px;
+            font-size: 11px;
+        }
+
+        /* CV Preview Styles */
+        .preview {
+            background: #525659;
+            border-radius: 0;
+            padding: 20px;
+            box-shadow: none;
+            overflow-y: auto;
+            max-height: calc(100vh - 40px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .cv-page {
+            background: white;
+            width: 210mm;
+            min-height: auto;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        /* Header */
+        .cv-header {
+            padding: 20px;
+            background: white;
+            overflow: hidden;
+        }
+
+        .cv-photo {
+            float: left;
+            width: 75px;
+            height: 75px;
+            border-radius: 50%;
+            background: #4a5568;
+            overflow: hidden;
+            margin-right: 15px;
+        }
+
+        .cv-photo img {
+            width: 75px;
+            height: 75px;
+            object-fit: cover;
+            border-radius: 50%;
+            display: block;
+        }
+
+        .cv-header-info {
+            overflow: hidden;
+        }
+
+        .cv-name {
+            font-size: 24px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 2px;
+        }
+
+        .cv-title {
+            font-size: 13px;
+            color: #4a5568;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .cv-summary {
+            font-size: 10px;
+            color: #4a5568;
+            line-height: 1.4;
+            font-style: italic;
+        }
+
+        /* Contact bar */
+        .cv-contact-bar {
+            background: #2d3748;
+            color: white;
+            padding: 8px 20px;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            font-size: 10px;
+        }
+
+        .cv-contact-bar span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Body */
+        .cv-body {
+            padding: 15px 20px;
+            overflow: hidden;
+        }
+
+        .cv-left-column {
+            float: left;
+            width: 58%;
+            padding-right: 18px;
+            border-right: 1px solid #e2e8f0;
+        }
+
+        .cv-right-column {
+            float: right;
+            width: 38%;
+            padding-left: 14px;
+        }
+
+        .cv-section {
+            margin-bottom: 12px;
+        }
+
+        .cv-section-title {
+            font-size: 12px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .cv-item {
+            margin-bottom: 10px;
+            break-inside: avoid;
+        }
+
+        .cv-item-header {
+            display: block;
+        }
+
+        .cv-item-title {
+            font-weight: 700;
+            color: #1d1d1f;
+            font-size: 11px;
+        }
+
+        .cv-item-subtitle {
+            color: #2d3748;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .cv-item-date {
+            color: #718096;
+            font-size: 10px;
+            margin-top: 1px;
+        }
+
+        .cv-item-description {
+            margin-top: 4px;
+            color: #2d3748;
+            font-size: 10.5px;
+            line-height: 1.45;
+        }
+
+        .cv-item-description ul {
+            margin-left: 14px;
+            margin-top: 3px;
+        }
+
+        .cv-item-description li {
+            margin-bottom: 2px;
+        }
+
+        /* Skills with categories */
+        .skill-row {
+            display: flex;
+            margin-bottom: 6px;
+            font-size: 10.5px;
+            line-height: 1.4;
+        }
+
+        .skill-category {
+            font-weight: 700;
+            color: #1a365d;
+            min-width: 70px;
+            flex-shrink: 0;
+        }
+
+        .skill-items {
+            color: #4a5568;
+        }
+
+        .skill-item {
+            font-size: 11px;
+            margin-bottom: 4px;
+            line-height: 1.3;
+            color: #4a5568;
+        }
+
+        .edu-item {
+            margin-bottom: 10px;
+        }
+
+        .edu-degree {
+            font-weight: 700;
+            font-size: 11px;
+            color: #1a202c;
+        }
+
+        .edu-institution {
+            font-size: 10.5px;
+            color: #4a5568;
+        }
+
+        .edu-location {
+            font-size: 10px;
+            color: #718096;
+        }
+
+        .cv-project-tech {
+            font-size: 10.5px;
+            color: #718096;
+            margin-top: 1px;
+        }
+
+        @media print {
+            * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+            body { background: white !important; padding: 0 !important; margin: 0 !important; }
+            .container { display: block !important; max-width: none !important; padding: 0 !important; margin: 0 !important; }
+            .panel:first-child { display: none !important; }
+            .preview {
+                background: white !important;
+                padding: 0 !important;
+                max-height: none !important;
+                overflow: visible !important;
+                display: block !important;
+                visibility: visible !important;
+                border-radius: 0 !important;
+                box-shadow: none !important;
+            }
+            .cv-page {
+                display: block !important;
+                visibility: visible !important;
+                width: 100% !important;
+                min-height: auto !important;
+                box-shadow: none !important;
+            }
+            .cv-header {
+                padding: 20px !important;
+                overflow: hidden !important;
+            }
+            .cv-photo {
+                float: left !important;
+                width: 80px !important;
+                height: 80px !important;
+                margin-right: 15px !important;
+            }
+            .cv-photo img {
+                width: 80px !important;
+                height: 80px !important;
+            }
+            .cv-contact-bar {
+                background: #2d3748 !important;
+                color: white !important;
+            }
+            .cv-body {
+                display: block !important;
+                visibility: visible !important;
+                padding: 15px 20px !important;
+                overflow: visible !important;
+            }
+            .cv-left-column {
+                display: block !important;
+                visibility: visible !important;
+                float: left !important;
+                width: 58% !important;
+                padding-right: 18px !important;
+                border-right: 1px solid #e2e8f0 !important;
+            }
+            .cv-right-column {
+                display: block !important;
+                visibility: visible !important;
+                float: right !important;
+                width: 38% !important;
+                padding-left: 14px !important;
+            }
+            .cv-section {
+                display: block !important;
+                visibility: visible !important;
+                page-break-inside: avoid;
+            }
+            .cv-section-title {
+                display: block !important;
+                visibility: visible !important;
+            }
+            .cv-item {
+                display: block !important;
+                visibility: visible !important;
+                page-break-inside: avoid;
+            }
+            @page { size: A4; margin: 8mm; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="panel">
+            <h1>CV Generator</h1>
+            <p style="color: #6e6e73; margin-bottom: 30px;">Build your professional CV</p>
+
+            <div class="tabs">
+                <button class="tab active" onclick="switchTab('personal', event)">Personal</button>
+                <button class="tab" onclick="switchTab('experience', event)">Experience</button>
+                <button class="tab" onclick="switchTab('education', event)">Education</button>
+                <button class="tab" onclick="switchTab('skills', event)">Skills</button>
+                <button class="tab" onclick="switchTab('projects', event)">Projects</button>
+            </div>
+
+            <div id="personal-tab" class="tab-content active">
+                <h3>Personal Information</h3>
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="name" placeholder="Xin Wang" oninput="updatePreview()">
+                </div>
+                <div class="form-group">
+                    <label>Job Title</label>
+                    <input type="text" id="job-title" placeholder="Senior Software Engineer" oninput="updatePreview()">
+                </div>
+                <div class="form-group">
+                    <label>Professional Summary</label>
+                    <textarea id="summary" placeholder="Brief, impactful summary..." oninput="updatePreview()"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="email" placeholder="email@example.com" oninput="updatePreview()">
+                </div>
+                <div class="form-group">
+                    <label>Phone</label>
+                    <input type="tel" id="phone" placeholder="+44 7868 179491" oninput="updatePreview()">
+                </div>
+                <div class="form-group">
+                    <label>Location</label>
+                    <input type="text" id="location" placeholder="UK" oninput="updatePreview()">
+                </div>
+                <div class="form-group">
+                    <label>Photo URL (optional)</label>
+                    <input type="text" id="photo" placeholder="portrait.png" oninput="updatePreview()">
+                </div>
+            </div>
+
+            <div id="experience-tab" class="tab-content">
+                <h3>Add Work Experience</h3>
+                <div class="form-group">
+                    <label>Job Title</label>
+                    <input type="text" id="exp-title" placeholder="Software Engineer">
+                </div>
+                <div class="form-group">
+                    <label>Company</label>
+                    <input type="text" id="exp-company" placeholder="Amazon Web Services (AWS)">
+                </div>
+                <div class="form-group">
+                    <label>Location</label>
+                    <input type="text" id="exp-location" placeholder="London, UK">
+                </div>
+                <div class="form-group">
+                    <label>Start Date</label>
+                    <input type="text" id="exp-start" placeholder="06/2021">
+                </div>
+                <div class="form-group">
+                    <label>End Date</label>
+                    <input type="text" id="exp-end" placeholder="Present">
+                </div>
+                <div class="form-group">
+                    <label>Description (one bullet per line, include metrics)</label>
+                    <textarea id="exp-description" placeholder="• Led development of X, resulting in Y% improvement&#10;• Built system handling Z requests/day"></textarea>
+                </div>
+                <button onclick="addExperience()">Add Experience</button>
+                <div id="experience-list" class="item-list"></div>
+            </div>
+
+            <div id="education-tab" class="tab-content">
+                <h3>Add Education</h3>
+                <div class="form-group">
+                    <label>Degree</label>
+                    <input type="text" id="edu-degree" placeholder="PhD & MSc, Computer Science">
+                </div>
+                <div class="form-group">
+                    <label>Institution</label>
+                    <input type="text" id="edu-institution" placeholder="University Name">
+                </div>
+                <div class="form-group">
+                    <label>Location</label>
+                    <input type="text" id="edu-location" placeholder="UK">
+                </div>
+                <div class="form-group">
+                    <label>Year/Period</label>
+                    <input type="text" id="edu-year" placeholder="2014-2018">
+                </div>
+                <div class="form-group">
+                    <label>Additional Info</label>
+                    <textarea id="edu-info" placeholder="Research focus..."></textarea>
+                </div>
+                <button onclick="addEducation()">Add Education</button>
+                <div id="education-list" class="item-list"></div>
+            </div>
+
+            <div id="skills-tab" class="tab-content">
+                <h3>Add Skills</h3>
+                <div class="form-group">
+                    <label>Skill (format: "Category: item1, item2")</label>
+                    <input type="text" id="skill-item" placeholder="Languages: TypeScript, Python, C#">
+                </div>
+                <button onclick="addSkill()">Add Skill</button>
+                <div id="skills-list" class="item-list"></div>
+            </div>
+
+            <div id="projects-tab" class="tab-content">
+                <h3>Add Project</h3>
+                <div class="form-group">
+                    <label>Project Name</label>
+                    <input type="text" id="proj-name" placeholder="Sight - Visual Algorithm Editor">
+                </div>
+                <div class="form-group">
+                    <label>Technologies</label>
+                    <input type="text" id="proj-tech" placeholder="Electron, Python, OpenCV">
+                </div>
+                <div class="form-group">
+                    <label>Description (one bullet per line)</label>
+                    <textarea id="proj-description" placeholder="• Key achievement or feature&#10;• Link to repo or paper"></textarea>
+                </div>
+                <button onclick="addProject()">Add Project</button>
+                <div id="projects-list" class="item-list"></div>
+            </div>
+
+            <div class="button-group" style="margin-top: 30px;">
+                <button onclick="downloadPDF()">Download PDF</button>
+                <button class="secondary" onclick="saveData()">Save Data</button>
+                <button class="secondary" onclick="loadData()">Load Data</button>
+                <button class="danger" onclick="clearAll()">Clear All</button>
+            </div>
+        </div>
+
+        <div class="panel preview">
+            <div class="cv-page" id="cv-for-pdf">
+                <div class="cv-header">
+                    <div class="cv-photo" id="pdf-photo"></div>
+                    <div class="cv-header-info">
+                        <div class="cv-name" id="pdf-name">Your Name</div>
+                        <div class="cv-title" id="pdf-title">Job Title</div>
+                        <div class="cv-summary" id="pdf-summary"></div>
+                    </div>
+                </div>
+
+                <div class="cv-contact-bar" id="pdf-contact"></div>
+
+                <div class="cv-body">
+                    <div class="cv-left-column">
+                        <div class="cv-section">
+                            <div class="cv-section-title">Experience</div>
+                            <div id="pdf-experience-items"></div>
+                        </div>
+                    </div>
+
+                    <div class="cv-right-column">
+                        <div class="cv-section">
+                            <div class="cv-section-title">Skills</div>
+                            <div id="pdf-skills-items"></div>
+                        </div>
+
+                        <div class="cv-section">
+                            <div class="cv-section-title">Education</div>
+                            <div id="pdf-education-items"></div>
+                        </div>
+
+                        <div class="cv-section">
+                            <div class="cv-section-title">Projects</div>
+                            <div id="pdf-projects-items"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

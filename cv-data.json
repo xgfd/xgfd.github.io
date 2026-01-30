@@ -1,0 +1,119 @@
+{
+    "personal": {
+        "name": "Xin Wang",
+        "jobTitle": "Senior Software Engineer",
+        "email": "xinwang.dr@gmail.com",
+        "phone": "",
+        "location": "UK",
+        "linkedin": "linkedin.com/in/xinwang42",
+        "photo": "portrait.png",
+        "summary": "Full-stack engineer with a PhD in Computer Science, specializing in AI/ML systems and cloud architecture. 10+ years building production systems across healthcare, defence, IoT, and fintech. Track record of leading R&D teams and delivering complex prototypes from concept to deployment."
+    },
+    "experience": [
+        {
+            "title": "Software Engineer",
+            "company": "Amazon Web Services (AWS)",
+            "location": "",
+            "start": "06/2021",
+            "end": "Present",
+            "description": "• Delivered over 15 customer prototypes across healthcare, defence, IoT, and AI domains\n• Built GenAI solutions with fine-tuning, RAG, multi-agent orchestration, and LLM chaining\n• Designed VR courtroom training system with LLM-powered NPCs for judicial education\n• Automated EF Education's student accommodation allocation with integer programming, replacing manual team effort\n• Fine-tuned Whisper for RAF Air Traffic Control radio transcription, boosting processing speed by 3.2x\n• Mentored over 5 junior engineers and apprentices"
+        },
+        {
+            "title": "Founding Engineer, R&D Lead",
+            "company": "Sigma Squares Tech.",
+            "location": "",
+            "start": "05/2019",
+            "end": "06/2021",
+            "description": "• Led 10-person computer vision research team at cloud-native manufacturing startup\n• Built company-wide image processing library for defect detection\n• Developed low-code editor improving engineers' productivity by 10x\n• Designed lightweight FaaS system for high-speed defect detection\n• Established technical reading group to deepen team's ML fundamentals from primary sources"
+        },
+        {
+            "title": "Data Engineer",
+            "company": "Horizon Asset Management LLP",
+            "location": "",
+            "start": "05/2018",
+            "end": "05/2019",
+            "description": "• Built analytics for risk management, risk control, and portfolio performance analysis\n• Engineered financial knowledge graphs and SQL-RDF conversion pipelines\n• Delivered ELT pipelines for front office operations"
+        },
+        {
+            "title": "Research Fellow",
+            "company": "University of Southampton",
+            "location": "",
+            "start": "10/2014",
+            "end": "05/2018",
+            "description": "• Conducted research on distributed graph database optimisation\n• Led the development of a SQL/NoSQL database sharing platform\n• Led several international research projects (EU Horizon 2020, EPSRC)"
+        }
+    ],
+    "education": [
+        {
+            "degree": "PhD & MSc, Computer Science",
+            "institution": "University of Southampton",
+            "location": "UK",
+            "year": "",
+            "info": ""
+        },
+        {
+            "degree": "BSc, Information Management",
+            "institution": "University of Science and Technology of China",
+            "location": "",
+            "year": "",
+            "info": ""
+        }
+    ],
+    "skills": [
+        {
+            "category": "Languages",
+            "items": "TypeScript, Python, C#, Java"
+        },
+        {
+            "category": "Web",
+            "items": "React, NestJS, FastAPI, GraphQL, WebSocket"
+        },
+        {
+            "category": "AWS",
+            "items": "CDK, Lambda, Bedrock, Neptune, IoT Core, Greengrass"
+        },
+        {
+            "category": "AI/ML",
+            "items": "Nova Sonic, Whisper, RAG, Knowledge Bases, Computer Vision, MLflow"
+        },
+        {
+            "category": "Data",
+            "items": "Knowledge Graphs, SPARQL, Time-series"
+        }
+    ],
+    "projects": [
+        {
+            "name": "Swedish Federal Courts - Real-time AI Voice Training System",
+            "tech": "Nova Sonic, WebSocket, Bedrock, React, C#",
+            "description": "• Built real-time AI voice NPCs with bidirectional streaming and multi-persona support\n• Implemented game client with emotion tags and chaos events for training scenarios"
+        },
+        {
+            "name": "NICE - Healthcare Knowledge Graph",
+            "tech": "Amazon Neptune, FHIR, Bedrock, SPARQL",
+            "description": "• Designed healthcare knowledge graphs for NICE clinical guidelines\n• Built taxonomy ingestion pipeline with vector embeddings"
+        },
+        {
+            "name": "Royal Air Force - Flight Communications Transcription",
+            "tech": "Whisper, VAD, AWS Greengrass, Python, IoT",
+            "description": "• Fine-tuned Whisper models for Air Traffic Control radio transcription\n• Built edge deployment via AWS Greengrass with S3 upload pipeline",
+            "display": true
+        },
+        {
+            "name": "Visual Algorithm Editor",
+            "tech": "Electron, Python, OpenCV, TypeScript",
+            "description": "• Open-source visual editor for composing image processing pipelines (github.com/xgfd/sight)"
+        },
+        {
+            "name": "EF Education - Room Allocation Optimizer",
+            "tech": "Python, Linear/Integer Programming, AWS CDK",
+            "description": "• Optimized student room allocation using linear/integer programming\n• Built RoomTetris algorithm for constraint satisfaction",
+            "display": false
+        },
+        {
+            "name": "PRESTO - RDF Query Cardinality Estimation",
+            "tech": "RDF, SPARQL, Graph Databases, Query Optimisation",
+            "description": "• Probabilistic cardinality estimation for RDF queries based on subgraph overlapping\n• Novel subgraph-based approach outperforming triple-count methods\n• arXiv:1801.06408",
+            "display": false
+        }
+    ]
+}
